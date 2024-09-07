@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>I'm Bored</title>
+</head>
+
+<body>
+  <style>
+    /* General Styling */
+    body {
+      font-family: sans-serif;
+      background-color: #f8f8f8;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* Form Styling */
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .form-select {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      appearance: none;
+      /* Customize select appearance */
+    }
+
+    .form-submit {
+      padding: 10px 20px;
+      background-color: #1161da;
+      color: #fff;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    /* Card Styling */
+    .cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .card-item {
+      background-color: #f0f0f0;
+      padding: 20px;
+      border-radius: 5px;
+      margin-bottom: 20px;
+      width: 300px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-activity {
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .card-info {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9em;
+      color: #666;
+    }
+
+    .card-type,
+    .card-participants {
+      display: inline-block;
+    }
+
+    /* Error Styling */
+    .tag-error {
+      color: red;
+      margin-top: 20px;
+    }
+  </style>
+  <div class="container">
+    <h1>Let's find something for you to do ✌️</h1>
+
+    <form action="/" id="form" class="form" method="POST">
+      <select name="type" class="form-select">
+        <option value="" data-display="Select">Random type</option>
+        <option value="education">Education</option>
+        <option value="charity">Charity</option>
+        <option value="recreational">Recreational</option>
+        <option value="relaxation">Relaxation</option>
+        <option value="busywork">Busywork</option>
+        <option value="social">Social</option>
+        <option value="diy">DIY</option>
+        <option value="music">Music</option>
+      </select>
+      <select name="participants" class="form-select">
+        <option value="">Any number of people</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+      </select>
+      <button type="submit" class="form-submit">Go</button>
+    </form>
+    <section id="cards" class="cards">
+      <article class="card-item">
+        <h2 class="card-activity">
+          <!-- Show Activity -->
+          <% if (locals.data) { %>
+            <%= data.activity %>
+              <% } %>
+        </h2>
+        <div class="card-info">
+          <span class="card-type">
+            <% if (locals.data) { %>
+              <%= data.type %>
+                <% } %>
+          </span>
+          <span class="card-participants">
+            <!-- participants: Show participant number -->
+            <% if (locals.data) { %>
+              <%= data.participants %>
+                <% } %>
+                  <span class="card-number"></span>
+          </span>
+        </div>
+      </article>
+
+
+      <div id="tag-error" class="tag-error">
+        <!-- Show any errors that were sent from the backend -->
+        <% if (locals.error) { %>
+          <h2>
+            <%= error %>
+          </h2>
+
+          <% } %>
+      </div>
+
+    </section>
+  </div>
+
+</body>
+
+</html>
